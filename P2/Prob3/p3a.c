@@ -1,0 +1,55 @@
+//FOLHA 2 - p2b.c
+//FILE COPY
+//USAGE: copy source destination
+
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <time.h>
+
+#define BUFFER_SIZE 512
+
+int main(int argc, char *argv[])
+{
+ int fd1, nr, nw;
+ unsigned char buffer[BUFFER_SIZE];
+ time_t begin, end;
+	double diff_t;
+
+ begin = clock();
+
+ if (argc != 2) {
+  printf("Usage: %s <source> \n", argv[0]);
+  return 1;
+ }
+ fd1 = open(argv[1], O_RDONLY);
+ if (fd1 == -1) {
+  perror(argv[1]);
+  return 2;
+ }
+ /*fd2 = open(argv[2], O_WRONLY | O_CREAT | O_EXCL, 0644);
+ if (fd2 == -1) {
+  perror(argv[2]);
+  close(fd1);
+  return 3;
+ }*/
+ while ((nr = read(fd1, buffer, BUFFER_SIZE)) > 0)
+  if ((nw = write(STDOUT_FILENO, buffer, nr)) <= 0 || nw != nr) {
+   perror(argv[2]);
+   close(fd1);
+   //close(fd2);
+   return 4;
+  }
+  close(fd1);
+  //close(fd2);
+
+	end = clock();
+
+	diff_t = (double)(end-begin) / CLOCKS_PER_SEC;
+
+	printf("Com chamadas diretas ao sistema operativo demorou %f segundos\n", diff_t);
+
+  return 0;
+}
+
