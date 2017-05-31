@@ -23,7 +23,8 @@ int main(void)
 
   fd = open("/tmp/myfifo",O_RDONLY);
 
-  while(readline(fd,str)) printf("%s",str);
+  while(readline(fd,str))
+    printf("%s",str);
 
   close(fd);
 
