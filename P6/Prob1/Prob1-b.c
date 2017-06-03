@@ -13,7 +13,7 @@ void * thrfunc(void * arg)
   fprintf(stderr, "Starting thread %2d\n", (int) arg);
 
   for (i = 1; i <= NUMITER; i++)
-    write(STDERR, arg, 4);
+    write(STDERR, arg, 1);
 
   return NULL;
 }
