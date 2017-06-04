@@ -39,9 +39,9 @@ void *operating(void *elements)
         printf("Division by 0 not allowed\n");
         pthread_exit(NULL);
       }
+    default:
+      pthread_exit(NULL);
   }
-
-  pthread_exit(NULL);
 }
 
 int main ()
