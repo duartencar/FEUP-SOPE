@@ -17,11 +17,11 @@ void *fill(void *nr)
 {
   while (1)
   {
-    pthread_mutex_lock(&mut);
+    //pthread_mutex_lock(&mut);
 
     if (pos >= npos)
     {
-      pthread_mutex_unlock(&mut);
+      //pthread_mutex_unlock(&mut);
 
       return NULL;
     }
@@ -32,7 +32,7 @@ void *fill(void *nr)
 
     val++;
 
-    pthread_mutex_unlock(&mut);
+    //pthread_mutex_unlock(&mut);
 
     *(int *)nr += 1;
   }
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
     total += count[k];
   }
 
-  printf("total count = %d\n",total);   // mostra total
+  printf("total count = %d\n", total);   // mostra total
 
   pthread_create(&tidv, NULL, verify, NULL);
 
@@ -94,3 +94,7 @@ int main(int argc, char *argv[])
 
   return 0;
 }
+
+//This program shows that without the mutexes the total count wont match what
+//you inseterd in the program parameters and will count more
+// because of race conditions
