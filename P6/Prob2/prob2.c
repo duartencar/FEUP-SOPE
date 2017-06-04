@@ -3,7 +3,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-int n = 100;
+int n = 50000;
 
 #define STDERR 2
 
